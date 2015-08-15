@@ -18,6 +18,8 @@ Route::group(array(
 	'prefix' => 'api'
 ), function ()
 {
+	Route::get('/users/', 'Controllers\UserController@showAllUsers');
+	Route::post('/users/', 'Controllers\UserController@addUser');
 	
 	Route::get('/', function ()
 	{

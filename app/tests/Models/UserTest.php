@@ -1,37 +1,23 @@
 <?php
 namespace Tests\Models;
 
-use Tests\Models\User;
+use Models\User;
+use Helpers\AopMocker;
 
-class PostTest extends \PHPUnit_Framework_TestCase
+class UserTest extends \TestCase
 {
 
-	public function testGeneratePO()
+	public function testCreateUser()
 	{
-		$user = User::getUserById(1);
-		Post::createPost($user, "Test", "This is a test post !", array(
-			"test",
-			"unit"
+		AopMocker::mock("Models\\User", "save", true);
+		
+		$res=User::createUser(array(
+			'name' => 'Ahmad Hajjar',
+			'email' => 'ash852006@gmail.com',
+			'password' => '12345678'
 		));
-		$this->assertEquals(1,1);
-	}
-}
-
-class User
-{
-
-	public static function getUserById($int)
-	{
-		return new static();
-	}
-}
-
-class Post
-{
-
-	public static function createPost(User $user, $title, $body, array $tags)
-	{
-		return TRUE;
+		
+		$this->assertNotFalse($res);
 	}
 }
 ?>
