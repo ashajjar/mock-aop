@@ -4,8 +4,6 @@ namespace Aspects;
 use Go\Aop\Aspect;
 use Go\Aop\Intercept\MethodInvocation;
 use Go\Lang\Annotation\Around;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -20,7 +18,7 @@ class MockingAspect implements Aspect
 	 *
 	 * @param MethodInvocation $invocation
 	 *        	Invocation
-	 *        	@Around("execution(public *\*::*(*))")
+	 *        	@Around("execution(public **\*::*(*))")
 	 */
 	public function aroundStaticMethodExecution(MethodInvocation $invocation)
 	{
