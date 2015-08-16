@@ -1,5 +1,5 @@
 <?php
-namespace Tests;
+namespace Helpers;
 
 /**
  * This class is a utility class that can be used for mocking and testing.

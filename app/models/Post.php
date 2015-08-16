@@ -1,18 +1,24 @@
 <?php
-namespace Tests\Models;
+namespace Models;
 
 use Jenssegers\Mongodb\Model;
+use Traits\MockableModel;
 
 class Post extends Model
 {
+	use MockableModel;
 
-	public static function createPost(User $user, $title, $body, array $tags)
+	public static function createPost($user_id, $title, $body, array $tags)
 	{
+		$user = User::getUser($user_id);
+		if (! $user instanceof User) {
+			return - 1; // User does not exist
+		}
 		if ($title == "") {
-			return - 1;
+			return - 2;
 		}
 		if (count($tags) < 2) {
-			return - 2;
+			return - 3;
 		}
 		$post = new Post();
 		$post->title = $title;
@@ -24,9 +30,5 @@ class Post extends Model
 		else
 			return - 3;
 	}
-}
-
-class User
-{
 }
 ?>
