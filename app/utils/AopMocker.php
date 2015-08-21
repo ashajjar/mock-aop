@@ -24,11 +24,9 @@ class AopMocker
 	{
 		$mocks = Config::get('aopmock.mockable_methods');
 		if (isset($mocks[$class])) {
-			if (! isset($mocks[$class][$method])) {
-				$mocks[$class][$method] = $result;
-				Config::set('aopmock.mockable_methods', $mocks);
-				return;
-			}
+			$mocks[$class][$method] = $result;
+			Config::set('aopmock.mockable_methods', $mocks);
+			return;
 		}
 		$mocks[$class] = array(
 			$method => $result
