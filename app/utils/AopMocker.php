@@ -33,6 +33,36 @@ class AopMocker
 		);
 		Config::set('aopmock.mockable_methods', $mocks);
 	}
+	
+		/**
+	 * Remove the mock defined for this method in the given class.
+	 *
+	 * @param string $class
+	 *        	Fully qualified class name.
+	 * @param string $method
+	 *        	Method name.
+	 * @param bool $onlyThisMethod
+	 *        	Default is true, meaning that only this single method of this class
+	 *        	is going to be unmocked. If it is set to false, all mocked methods
+	 *        	in this class will be unmocked
+	 */
+	public static function unmock($class, $method, $onlyThisMethod = true)
+	{
+		$mocks = Config::get('aopmock.mockable_methods');
+		if (isset($mocks[$class])) {
+			
+			if (! $onlyThisMethod) {
+				unset($mocks[$class]);
+				return;
+			}
+			
+			if (isset($mocks[$class][$method])) {
+				unset($mocks[$class][$method]);
+				return;
+			}
+		}
+		Config::set('aopmock.mockable_methods', $mocks);
+	}
 }
 
 ?>
